@@ -13,6 +13,7 @@
             </div>
             <div class="content p-0">
                 <EventsData :page-of-items="pageOfItems" />
+                <Calendar :event-data="events" />
             </div>
         </div>
     </div>
@@ -21,13 +22,14 @@
 <script>
     import JwPagination from "jw-vue-pagination"
     import EventsData from "./events/data"
+    import Calendar from "./calendar"
     import SquareLoader from 'vue-spinner/src/SquareLoader.vue'
     import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
     import {getEvents} from "../data/api";
 
     export default {
         name: "EventsPage",
-        components: {JwPagination, EventsData, SquareLoader, PulseLoader},
+        components: {JwPagination, EventsData, Calendar, SquareLoader, PulseLoader},
         data() {
             return {
                 events: [],
@@ -44,8 +46,8 @@
         },
         methods: {
             async getData() {
-                console.log('category')
-                console.log(this.$route.params.slug)
+                console.log('category');
+                console.log(this.$route.params.slug);
 
                 return getEvents(this.$route.params.slug || null)
                     .then(data => {

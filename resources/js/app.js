@@ -5,6 +5,7 @@ try {
 } catch (e) {}
 
 window.Vue = require('vue');
+window.L = require('leaflet');
 window.axios = require('axios');
 window.iAxios = window.axios.create({
     ...window.axios.defaults,
@@ -35,7 +36,7 @@ Vue.use(VueCarousel);
 window.apiURL = iAxios.defaults.baseURL;
 import EventsPage from "./components/events";
 import Pages from "./components/pages";
-import Map from "./components/map";
+import MapPage from "./components/map";
 
 const routes = [
     {
@@ -60,8 +61,8 @@ const routes = [
     },
     {
         name: 'map',
-        path: '/map',
-        component: Map
+        path: '/static/map',
+        component: MapPage
     },
 ];
 const router = new VueRouter({ mode: 'history', routes: routes});
