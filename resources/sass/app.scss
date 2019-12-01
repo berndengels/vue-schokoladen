@@ -18,8 +18,9 @@ html, body {
 	font-weight: 200;
 	margin: 0;
 	background-color: $body-bg-red;
+	color: #fff;
 }
-
+/*
 .background_right {
 	position: fixed;
 	clear: both;
@@ -55,28 +56,6 @@ html, body {
 		background-position-y: 55px;
 	}
 
-	div.paginator {
-		display: block;
-		width: 100%;
-		min-width: 100%;
-		float: left;
-		clear: both;
-		ul.pagination {
-			li.page-item {
-				&.active {
-					a.page-link {
-						font-weight: bold;
-						background-color: $blue;
-					}
-				}
-				a.page-link {
-					color: #fff;
-					background-color: $body-bg-red;
-				}
-			}
-		}
-	}
-
 	.card {
 		margin-top: 20px;
 		background-color: transparent;
@@ -96,20 +75,6 @@ html, body {
 					color: $sYellow;
 				}
 			}
-		}
-	}
-
-	.footer {
-		.pager {
-			position: fixed;
-			bottom: 8px;
-			right: 10px;
-			@include media("<tablet") {
-				left: 10px;
-				right: auto;
-				max-width: 50%;
-			}
-			border: 1px solid yellow;
 		}
 	}
 
@@ -198,11 +163,6 @@ html, body {
 									margin: 0;
 									padding: 5px 5px 0 10px;
 									color: $sFontColor;
-									/*
-																		@include media("<desktop") {
-																			font-size: 100%;
-																		}
-									*/
 									@include media("<tablet") {
 										font-size: 80%;
 									}
@@ -285,92 +245,6 @@ html, body {
 								@include media("<tablet") {
 									height: auto;
 									max-width: 100%;
-								}
-							}
-						}
-/*
-						.carousel {
-							width: 100%;
-							height: auto;
-							padding: 0;
-							margin: 0;
-							background-color: #000;
-							overflow: hidden;
-							@include media(">=tablet") {
-								height: 300px;
-							}
-							@include media("<tablet") {
-								height: 200px;
-							}
-
-							.carousel-inner {
-								white-space: nowrap;
-								overflow: hidden;
-
-								.carousel-item {
-									clear: none;
-
-									img {
-										clear: none;
-										//max-width: 533px;
-										height: auto;
-										z-index: 10000;
-										@include media(">=tablet") {
-											height: 300px;
-											//                                            max-height: 300px;
-										}
-										@include media("<tablet") {
-											height: 200px;
-											width: auto;
-											max-width: 100%;
-										}
-									}
-
-									.carousel-caption {
-										color: #ffe924;
-										text-shadow: 0 0 3px #f00, 0 0 5px #00f;
-									}
-								}
-							}
-						}
-*/
-						.carousel-wrapper {
-							width: 100%;
-							min-width: 100%;
-
-							.VueCarousel {
-								background-color: #000;
-								text-align: center;
-								padding: 0;
-								margin: 0;
-								justify-content: center;
-
-								.VueCarousel-inner {
-									width: 100%;
-									min-width: 100%;
-
-									.VueCarousel-slide {
-										width: 100%;
-										min-width: 100%;
-
-										background-color: red;
-										padding: 0;
-										align-items: center;
-										color: #999;
-										display: flex;
-										font-size: 1.5rem;
-										justify-content: center;
-										margin: auto;
-										img {
-											width: 100%;
-											height: 100%;
-											max-height: 100%;
-											min-height: 100%;
-											margin: auto;
-											text-align: center;
-											vertical-align: middle;
-										}
-									}
 								}
 							}
 						}
@@ -512,52 +386,7 @@ html, body {
 		}
 	}
 }
-
-.img-responsive {
-	display: inline-block;
-}
-
-a {
-	color: $sYellow;
-}
-
-a:hover {
-	color: #ff0;
-}
-
-.pager {
-	display: inline-flex;
-	width: auto;
-	height: auto;
-	margin: 0;
-	padding: 0;
-	//min-width: 200px;
-	z-index: 2000;
-
-	ul {
-		margin: 0;
-		padding: 0;
-
-		* {
-			background-color: transparent;
-		}
-
-		li {
-			&.page-item {
-			}
-
-			span {
-				color: #fff;
-				font-weight: bold;
-			}
-		}
-	}
-}
-
-img {
-	@extend .img-fluid;
-}
-
+*/
 .modal {
 	.modal-dialog {
 		border: 1px solid #fff;
@@ -610,74 +439,19 @@ img {
 	}
 }
 
-nav.navbar {
-	&.bg-black {
-		background-color: #000 !important;
-	}
+.img-responsive {
+	display: inline-block;
+}
 
-	&.navbar-dark {
-		.nav-item {
-			.nav-link {
-				line-height: 1.5rem;
-				vertical-align: middle;
-				color: $sFontColor;
+a {
+	color: $sYellow;
+}
 
-				ion-icon {
-					font-size: 1.5rem;
-				}
-			}
-		}
-	}
-
-	.dropdown-menu {
-		&.show {
-			box-shadow: 5px 5px 10px #000;
-			background-color: #000;
-			z-index: 10000;
-
-			.dropdown-item {
-				color: $sFontColor;
-			}
-
-			.dropdown-item:hover {
-				background-color: #900;
-			}
-
-			@include media("<tablet") {
-				box-shadow: none;
-				background-color: $sRed;
-				.dropdown-item {
-					color: $sFontColor;
-				}
-				.dropdown-item:hover {
-					background-color: #900;
-				}
-			}
-		}
-	}
-
-	.navbar-brand {
-		img {
-			width: auto;
-			height: 40px;
-			@include media("<=tablet") {
-				max-height: 18px;
-			}
-
-		}
-
-		img:last-child {
-			margin-left: 10px;
-		}
-	}
-
-	.nav-link {
-		img {
-			clear: none;
-			width: auto;
-			height: 20px;
-		}
-	}
+a:hover {
+	color: #ff0;
+}
+img {
+	@extend .img-fluid;
 }
 
 .embed-responsive-wrapper {
@@ -687,4 +461,88 @@ nav.navbar {
 
 pre {
 	color: #fff;
+}
+
+.carousel-wrapper {
+	width: 100%;
+	min-width: 100%;
+
+	.VueCarousel {
+		background-color: #000;
+		text-align: center;
+		padding: 0;
+		margin: 0;
+		justify-content: center;
+
+		.VueCarousel-inner {
+			width: 100%;
+			min-width: 100%;
+
+			.VueCarousel-slide {
+				width: 100%;
+				min-width: 100%;
+
+				background-color: red;
+				padding: 0;
+				align-items: center;
+				color: #999;
+				display: flex;
+				font-size: 1.5rem;
+				justify-content: center;
+				margin: auto;
+				img {
+					width: 100%;
+					height: 100%;
+					max-height: 100%;
+					min-height: 100%;
+					margin: auto;
+					text-align: center;
+					vertical-align: middle;
+				}
+			}
+		}
+	}
+}
+div.paginator {
+/*
+	display: inline-block;
+	width: 100%;
+	min-width: 100%;
+	float: left;
+	clear: both;
+ */
+	ul.pagination {
+		li.page-item {
+			&.active {
+				a.page-link {
+					font-weight: bold;
+					background-color: $blue;
+				}
+			}
+			a.page-link {
+				color: #fff;
+				background-color: $body-bg-red;
+			}
+		}
+	}
+}
+.navbar-brand {
+	img {
+		width: auto;
+		height: 40px;
+		@include media("<=tablet") {
+			max-height: 18px;
+		}
+
+	}
+	img:last-child {
+		margin-left: 10px;
+	}
+}
+.nav-link {
+	img {
+		clear: none;
+		width: auto;
+		height: 20px;
+	}
 }

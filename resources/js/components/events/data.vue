@@ -1,5 +1,5 @@
 <template>
-    <div class="eventContainer col-sm-12 col-lg-6">
+    <div class="col">
         <div class="event" v-for="(item, index) in this.$props.pageOfItems" :key="index">
             <div class="eventContent col-12">
                 <b-card-header header-tag="header" class="p-1 col-12">

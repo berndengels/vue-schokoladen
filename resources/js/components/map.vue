@@ -1,10 +1,6 @@
 <template>
-    <div class="container">
-        <div class="clearfix p-0 m-0">
-            <div class="col-12 m-0 p-0 float-left">
-                <Map />
-            </div>
-        </div>
+    <div class="col-12">
+        <Map />
     </div>
 </template>
 

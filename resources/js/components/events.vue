@@ -3,17 +3,19 @@
         <div v-if="loader.loading">
             <pulse-loader class="mt-4" :loading="loader.loading" :color="loader.color" :size="loader.size"></pulse-loader>
         </div>
-        <div v-else class="mx-2">
-            <div class="paginator my-0">
-                <jw-pagination
-                    :items="events"
-                    :pageSize="10"
-                    @changePage="onChangePage"
-                />
-            </div>
-            <div class="content p-0">
-                <EventsData :page-of-items="pageOfItems" />
-                <Calendar :event-data="events" />
+        <div v-else>
+            <div class=" clearfix p-0">
+                <div class="paginator ml-4 mt-2">
+                    <jw-pagination
+                            :items="events"
+                            :pageSize="10"
+                            @changePage="onChangePage"
+                    />
+                </div>
+                <div class="row">
+                    <EventsData :page-of-items="pageOfItems" />
+                    <Calendar :event-data="events" />
+                </div>
             </div>
         </div>
     </div>

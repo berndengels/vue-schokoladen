@@ -3,7 +3,7 @@
     <div class="container col-12 m-0 p-0">
         <TopNavigation />
         <transition name="fade" mode="out-in">
-            <router-view class="content py-2"></router-view>
+            <router-view />
         </transition>
         <BottomNavigation />
     </div>

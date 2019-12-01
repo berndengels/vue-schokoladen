@@ -1,5 +1,5 @@
 <template>
-    <div class="calendar col-lg-5">
+    <div class="col">
         <h1>Calendar</h1>
         <div>
             Place for Calendar
