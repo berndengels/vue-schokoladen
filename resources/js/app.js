@@ -9,7 +9,8 @@ window.L = require('leaflet');
 window.axios = require('axios');
 window.iAxios = window.axios.create({
     ...window.axios.defaults,
-    baseURL: 'http://schoki2.loc',
+    //baseURL: 'http://schoki2.loc',
+    baseURL: 'https://test.schokoladen-mitte.de',
     headers: {
         ...window.axios.defaults.headers,
         common: {
