@@ -1,50 +1,70 @@
 <template>
     <div>
         <h3 class="page-header mt-2">Adresse</h3>
-        <div class="address col-12">
-            <span>Ackerstrasse 169, 10115 Berlin</span><br>
-            <span>Fon: 030 - 282 65 27</span><br>
-            <span>Email: <a href="mailto:info@schokoladen-mitte.de" target="_blank">info@schokoladen-mitte.de</a></span>
+        <div id="address" class="col-12">
+            <div>
+                <span>{{ location.address }}</span><br>
+                <span>Fon: {{ location.fon }}</span><br>
+                <span>Email: <a :href="'mailto:' + location.email" target="_blank">{{ location.email }}</a></span>
+            </div>
         </div>
-        <div id="map" class="mt-2"></div>
+        <div id="map" class="mt-2">
+            <l-map style="height: 100%; width: 100%" :zoom="zoom" :center="center">
+                <l-tile-layer :url="url" />
+                <l-marker :lat-lng="markerLatLng" @add="openPopup">
+                    <l-popup :options="{ autoClose: false, closeOnClick: false }">
+                        <div>
+                            <span>{{ location.address }}</span><br>
+                            <span>Fon: {{ location.fon }}</span><br>
+                            <span>Email: <a :href="'mailto:' + location.email" target="_blank">{{ location.email }}</a></span>
+                        </div>
+                    </l-popup>
+                </l-marker>
+            </l-map>
+        </div>
     </div>
 </template>
 
 <script>
-//    import * as Vue2Leaflet from 'vue2-leaflet'
-    import {LMap, LTileLayer, LMarker} from 'vue2-leaflet'
+    import Location from "../../inc/config";
+    import { Icon } from "leaflet";
+    import "leaflet.icon.glyph";
+    import {
+        LMap,
+        LTileLayer,
+        LMarker,
+        LPopup
+    } from 'vue2-leaflet'
+
+    delete Icon.Default.prototype._getIconUrl;
+    Icon.Default.mergeOptions({
+        iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+        iconUrl: require("leaflet/dist/images/marker-icon.png"),
+        shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+    });
 
     export default {
         name: "Map",
-        components: {LMap, LTileLayer, LMarker},
+        components: {LMap, LTileLayer, LMarker, LPopup},
         data () {
             return {
+                location: Location,
+                zoom: Location.zoom,
+                center: [Location.lat, Location.lng],
+                url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                markerLatLng: [Location.lat, Location.lng],
             }
         },
         methods: {
+            openPopup: function (event) {
+                var self = this;
+                this.popupTarget = event.target;
+                this.$nextTick(function () {
+                    self.popupTarget.openPopup();
+                });
+            },
         }
     }
-/*
-    $(document).ready(function(){
-        var lat = 52.529745,
-            lng = 13.397245,
-            location = [lat, lng],
-            zoom = 16,
-            map = L.map('map').setView(location, zoom),
-            popup = L.popup()
-                .setLatLng(location)
-                .setContent('<p>Schokoladen Berlin-Mitte<br />Ackerstrasse 169</p>'),
-            marker = L.marker(location)
-                .addTo(map)
-                .bindPopup(popup)
-                .openPopup()
-        ;
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/" class="mbs">OpenStreetMap</a>'
-        }).addTo(map);
-    });
- */
 </script>
 <style scoped>
     div#map {

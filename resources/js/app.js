@@ -9,8 +9,8 @@ window.L = require('leaflet');
 window.axios = require('axios');
 window.iAxios = window.axios.create({
     ...window.axios.defaults,
-    //baseURL: 'http://schoki2.loc',
-    baseURL: 'https://test.schokoladen-mitte.de',
+    baseURL: 'http://schoki2.loc',
+//    baseURL: 'https://test.schokoladen-mitte.de',
     headers: {
         ...window.axios.defaults.headers,
         common: {
@@ -27,12 +27,10 @@ window.iAxios = window.axios.create({
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
 import BootstrapVue from 'bootstrap-vue'
-import VueCarousel from 'vue-carousel';
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, iAxios);
 Vue.use(BootstrapVue);
-Vue.use(VueCarousel);
 
 window.apiURL = iAxios.defaults.baseURL;
 import EventsPage from "./components/events";
@@ -42,7 +40,7 @@ import MapPage from "./components/map";
 const routes = [
     {
         name: 'events',
-        path: '/events',
+        path: '/',
         component: EventsPage
     },
     {
@@ -68,5 +66,12 @@ const routes = [
 ];
 const router = new VueRouter({ mode: 'history', routes: routes});
 
+//import vuetify from './plugins/vuetify'
+import VCalendar from 'v-calendar';
+
+// Use v-calendar, v-date-picker & v-popover components
+Vue.use(VCalendar, {
+    firstDayOfWeek: 2,  // Monday
+});
 import App from './App.vue';
 const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');
