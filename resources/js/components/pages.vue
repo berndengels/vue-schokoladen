@@ -1,19 +1,19 @@
 <template>
-    <div class="container">
-        <Page :page-data="data" />
-    </div>
+  <div class="container">
+    <Page :page-data="data" />
+  </div>
 </template>
 
 <script>
     import Page from "./pages/page";
-    import {getPage} from "../data/api";
+    import { getPage } from "../data/api";
 
     export default {
         name: "Pages",
-        components: {Page},
+        components: { Page },
         data () {
             return {
-                data: {}
+                data: {},
             }
         },
         created() {
@@ -28,7 +28,7 @@
                     .catch(err => {
                         console.error(err)
                     })
-            }
-        }
+            },
+        },
     }
 </script>

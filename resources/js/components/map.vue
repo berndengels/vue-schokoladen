@@ -1,7 +1,7 @@
 <template>
-    <div class="col-12">
-        <Map />
-    </div>
+  <div class="col-12">
+    <Map />
+  </div>
 </template>
 
 <script>
@@ -9,13 +9,13 @@
 
     export default {
         name: "MapPage",
-        components: {Map},
+        components: { Map },
         data () {
             return {
-                data: []
+                data: [],
             }
         },
         methods: {
-        }
+        },
     }
 </script>

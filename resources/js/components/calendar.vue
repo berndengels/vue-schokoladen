@@ -1,13 +1,13 @@
 <template>
-    <div class="col">
-        <h1>Calendar</h1>
-        <div>
-            <v-calendar
-                :attributes='attrs'
-                @dayclick="handleClick"
-            />
-        </div>
+  <div class="col">
+    <h1>Calendar</h1>
+    <div>
+      <v-calendar class="calendar"
+                  :attributes="attrs"
+                  @dayclick="handleClick"
+      />
     </div>
+  </div>
 </template>
 
 <script>
@@ -15,7 +15,7 @@
 
     export default {
         name: "Calendar",
-        comments: {VCalendar},
+        comments: { VCalendar },
         props: ['events'],
         data() {
             return {
@@ -27,7 +27,8 @@
                         },
                         // Just use a normal style
                         contentStyle: {
-                            color: '#ff0000',
+                            color: '#fff',
+                            backgroundColor: '#a00',
                         },
                         dates: this.getDates(),
                     },
@@ -48,7 +49,7 @@
                 return this.$props.events.map(item => {
                     return item.date.split(' ').shift();
                 });
-            }
-        }
+            },
+        },
     }
 </script>

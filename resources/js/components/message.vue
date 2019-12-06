@@ -1,20 +1,20 @@
 <template>
-    <div>
-        <h3>Movies Page</h3>
-        <div class="paginator">
-            <jw-pagination
-                :items="movies"
-                :pageSize="15"
-                @changePage="onChangePage"
-            />
-        </div>
-        <div class="clearfix p-0 m-0">
-            <div class="col-12 m-0 p-0 float-left">
-                <MyMovies :page-of-items="pageOfItems" />
-            </div>
-            <MyMovieModal />
-        </div>
+  <div>
+    <h3>Movies Page</h3>
+    <div class="paginator">
+      <jw-pagination
+        :items="movies"
+        :page-size="15"
+        @changePage="onChangePage"
+      />
     </div>
+    <div class="clearfix p-0 m-0">
+      <div class="col-12 m-0 p-0 float-left">
+        <MyMovies :page-of-items="pageOfItems" />
+      </div>
+      <MyMovieModal />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,11 +24,11 @@
 
     export default {
         name: "MoviesPage",
-        components: {JwPagination, MyMovies, MyMovieModal},
+        components: { JwPagination, MyMovies, MyMovieModal },
         data() {
             return {
                 movies: [],
-                pageOfItems: []
+                pageOfItems: [],
             }
         },
         created() {
@@ -51,7 +51,7 @@
             },
             onChangePage(pageOfItems) {
                 this.pageOfItems = pageOfItems;
-            }
-        }
+            },
+        },
     }
 </script>

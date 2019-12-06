@@ -1,21 +1,39 @@
 <template>
-    <div id="top-navigation">
-        <b-navbar toggleable="md" type="dark" variant="dark">
-            <b-navbar-nav>
-                <b-navbar-brand href="/events">
-                    <img src="/img/batcow_yellow.png" />
-                    <img src="/img/schokoladen_schrift_yellow.png" />
-                </b-navbar-brand>
-                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-                <b-collapse id="nav-collapse" is-nav>
-                    <b-nav-item-dropdown :href="item.url" v-for="item in topMenu" :key="item.id" :text="item.name" right>
-                        <b-dropdown-item v-if="item.children.length > 0" :href="child.url" v-for="child in item.children" :key="child.id">{{ child.name }}</b-dropdown-item>
-                        <b-dropdown-item v-else>{{ item.name }}</b-dropdown-item>
-                    </b-nav-item-dropdown>
-                </b-collapse>
-            </b-navbar-nav>
-        </b-navbar>
-    </div>
+  <div id="top-navigation">
+    <b-navbar toggleable="md" type="dark" variant="dark">
+      <b-navbar-nav>
+        <b-navbar-brand>
+          <router-link to="/">
+            <img src="/img/batcow_yellow.png">
+            <img src="/img/schokoladen_schrift_yellow.png">
+          </router-link>
+        </b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse" />
+        <b-collapse id="nav-collapse" is-nav>
+          <b-nav-item-dropdown
+            v-for="item in topMenu"
+            :key="item.id"
+            :text="item.name" right
+          >
+            <span v-if="item.children.length > 0">
+              <b-dropdown-item
+                v-for="child in item.children"
+                :key="child.id"
+                :to="child.url"
+              >
+                {{ child.name }}
+              </b-dropdown-item>
+            </span>
+            <span v-else>
+              <b-dropdown-item>
+                {{ item.name }}
+              </b-dropdown-item>
+            </span>
+          </b-nav-item-dropdown>
+        </b-collapse>
+      </b-navbar-nav>
+    </b-navbar>
+  </div>
 </template>
 
 <script>
@@ -32,7 +50,6 @@
             this.getNavMenu('top');
         },
         methods: {
-
             getNavMenu(type) {
                 getMenu(type)
                     .then(data => {
@@ -41,8 +58,8 @@
                     .catch(err => {
                         console.error(err)
                     });
-            }
-        }
+            },
+        },
     }
 </script>
 

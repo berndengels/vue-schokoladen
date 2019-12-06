@@ -1,12 +1,12 @@
 
 <template>
-    <div class="container col-12 m-0 p-0">
-        <TopNavigation />
-        <transition name="fade" mode="out-in">
-            <router-view />
-        </transition>
-        <BottomNavigation />
-    </div>
+  <div class="container col-12 m-0 p-0">
+    <TopNavigation />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
+    <BottomNavigation />
+  </div>
 </template>
 <script>
 
@@ -15,7 +15,7 @@
 
     export default {
         name: "App",
-        components: {TopNavigation, BottomNavigation}
+        components: { TopNavigation, BottomNavigation },
     }
 </script>
 

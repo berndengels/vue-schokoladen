@@ -438,7 +438,13 @@ html, body {
 		}
 	}
 }
-
+.calendar {
+	background-color: $body-bg-red !important;
+	color: #fff !important;
+	.vc-title {
+		color: #a0aec0 !important;
+	}
+}
 .img-responsive {
 	display: inline-block;
 }
@@ -464,8 +470,8 @@ pre {
 }
 .carousel-wrapper {
 	width: 100%;
-	height: 300px;
-	max-height: 300px;
+//	height: 300px;
+//	max-height: 300px;
 	background-color: transparent;
 	justify-content: center;
 }
