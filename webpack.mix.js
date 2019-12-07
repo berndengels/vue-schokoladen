@@ -13,6 +13,6 @@ mix.webpackConfig({
     }
 });
 mix
-    .js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+    .js('src/js/app.js', 'public/js')
+    .sass('src/sass/app.scss', 'public/css')
 ;

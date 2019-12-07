@@ -36,12 +36,16 @@ module.exports = {
         "vue/max-attributes-per-line": "off",
         "vue/no-v-html": "off",
         "vue/require-prop-types": "off",
-        "vue/no-use-v-if-with-v-for": ["error", {
+        "vue/no-use-v-if-with-v-for": ["off", {
             "allowUsingIterationVar": true,
         }],
+        "vue/singleline-html-element-content-newline": "off",
+        "vue/html-indent": "off",
+        "vue/attributes-order": "off",
         "allowEmptyCatch": "off",
         "no-empty": "off",
         "no-unused-vars": "off",
         "no-extra-boolean-cast": "off",
+        "indent": "off",
     }
 };
