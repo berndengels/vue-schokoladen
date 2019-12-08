@@ -1,8 +1,7 @@
 window._ = require('lodash');
 try {
 	window.Popper = require('popper.js').default;
-} catch (e) {
-}
+} catch (e) {}
 
 const Vue = window.Vue = require('vue');
 const axios = window.axios = require('axios');
@@ -16,9 +15,8 @@ import { sync } from 'vuex-router-sync';
 import EventsPage from "./components/events";
 import Pages from "./components/pages";
 import MapPage from "./components/map";
-import Vuetify from 'vuetify/lib'
-import vuetify from './plugins/vuetify';
 import App from './App.vue';
+import VCalendar from 'v-calendar'
 /*
 const axiosCache = window.axiosCache = setup({
     ...window.axios.defaults,
@@ -92,16 +90,15 @@ const router = new VueRouter({
 });
 
 sync(store, router);
-/*
+
 Vue.use(VCalendar, {
 	firstDayOfWeek: 2,  // Monday
 });
-*/
+
 try {
 	const app = new Vue(Vue.util.extend({
 		router,
 		store,
-		vuetify,
 	}, App)).$mount('#app');
 } catch (err) {
 }

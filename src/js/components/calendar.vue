@@ -22,52 +22,17 @@
         </div>
     </div>
 </template>
-
 <script>
-	import Vuetify from 'vuetify'
-
+import VCalendar from 'v-calendar'
 	export default {
 		name: "Calendar",
-		vuetify: new Vuetify(),
+        comments: { VCalendar },
         props: ['eventDates'],
-		data() {
-			return {
-/*
-				attrs: [{
-                    key: 'today',
-                    highlight: {
-                        backgroundColor: '#ff8080',
-                    },
-                    contentStyle: {
-                        color: '#fff',
-                        backgroundColor: '#a00',
-                    },
-                    dates: [],
-                }],
- */
-			};
-		},
-/*
-		computed: {
-			dates: function (el) {
-				console.info(el)
-				var calendar = this.$refs.calendar
-				calendar.attribute.dates = this.eventDates
-				calendar.reactive()
-				calendar.refresh()
-                return this.eventDates
-			}
-		},
- */
 		watch: {
 			eventDates: function(newVal, oldVal) { // watch it
 				console.log('Prop changed: ', newVal, ' | was: ', oldVal);
 				return newVal
 			},
-		},
-		mounted() {
-//			this.attrs[0].dates = this.eventDates
-			this.$refs.calendar.checkChange()
 		},
 		methods: {
             handleChange(e) {
