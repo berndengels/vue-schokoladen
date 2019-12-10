@@ -24,8 +24,8 @@ const store = new Vuex.Store({
 	actions: {
 		"GET_EVENTS": ({ commit }, payload) => {
 			const category = payload.category;
-			const url = !!category ? '/api/events/category/' + category : '/api/events';
-			iAxios
+			const url = !!category ? '/api/spa/events/category/' + category : '/api/spa/events';
+			axiosCache
 				.get(url)
 				.then(response => {
 					const events = {

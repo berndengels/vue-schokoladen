@@ -5,7 +5,7 @@ try {
 
 const Vue = window.Vue = require('vue');
 const axios = window.axios = require('axios');
-//import { setup } from 'axios-cache-adapter'
+import { setup } from 'axios-cache-adapter'
 import myConfig from "./inc/config";
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
@@ -15,9 +15,10 @@ import { sync } from 'vuex-router-sync';
 import EventsPage from "./components/events";
 import Pages from "./components/pages";
 import MapPage from "./components/map";
+import BandMessageFrom from './components/form/band-message-form';
 import App from './App.vue';
 import VCalendar from 'v-calendar'
-/*
+
 const axiosCache = window.axiosCache = setup({
     ...window.axios.defaults,
     baseURL: myConfig.apiURL,
@@ -33,10 +34,10 @@ const axiosCache = window.axiosCache = setup({
     withCredentials: false,
     maxRedirects: 5,
     cache: {
-        maxAge: 15 * 60 * 1000,
+        maxAge: 120 * 60 * 1000, // 2 hours
     },
 });
-*/
+/*
 const iAxios = window.iAxios = window.axios.create({
 	...window.axios.defaults,
 	baseURL: myConfig.apiURL,
@@ -52,9 +53,9 @@ const iAxios = window.iAxios = window.axios.create({
 	withCredentials: false,
 	maxRedirects: 5,
 });
-
+*/
 Vue.use(VueRouter);
-Vue.use(VueAxios, iAxios);
+Vue.use(VueAxios, axiosCache);
 Vue.use(BootstrapVue);
 
 const routes = [
@@ -82,6 +83,11 @@ const routes = [
 		name: 'map',
 		path: '/static/map',
 		component: MapPage,
+	},
+	{
+		name: 'contact',
+		path: '/contact/formBands',
+		component:  BandMessageFrom,
 	},
 ];
 const router = new VueRouter({

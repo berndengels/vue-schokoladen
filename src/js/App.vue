@@ -8,7 +8,6 @@
     </div>
 </template>
 <script>
-
 	import TopNavigation from "./components/top-navigation"
 	import BottomNavigation from "./components/bottom-navigation"
 

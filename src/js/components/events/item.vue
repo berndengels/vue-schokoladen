@@ -5,9 +5,7 @@
                 <div class="d-block float-left">
                     <b>{{ dateTime }}</b> <span>{{ event.category }}</span>
                 </div>
-                <div class="d-block">
-                    {{ event.title }}
-                </div>
+                <div class="d-block">{{ event.title }}</div>
             </b-button>
         </b-card-header>
         <b-collapse :id="'accordion-' + index" accordion="my-accordion" class="col-12" visible>

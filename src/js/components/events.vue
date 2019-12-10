@@ -94,8 +94,6 @@
 					this.$bvModal.show('myModal')
                 }
 			},
-            onEventsUpdate(e) {
-            },
 		},
 	}
 </script>

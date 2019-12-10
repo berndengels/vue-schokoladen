@@ -81,6 +81,7 @@
 		},
 		data() {
 			return {
+				instance: null,
 				pager: {},
 				ulStyles: {},
 				liStyles: {},
@@ -117,7 +118,6 @@
 		methods: {
 			setPage(page) {
 				const { items, pageSize, maxPages } = this;
-
 				// get new pager object for specified page
 				const pager = paginate(items.length, page, pageSize, maxPages);
 

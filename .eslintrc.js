@@ -42,6 +42,7 @@ module.exports = {
         "vue/singleline-html-element-content-newline": "off",
         "vue/html-indent": "off",
         "vue/attributes-order": "off",
+        "vue/no-unused-components": "off",
         "allowEmptyCatch": "off",
         "no-empty": "off",
         "no-unused-vars": "off",
