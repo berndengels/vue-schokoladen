@@ -12,9 +12,9 @@
             :required="this.$props.required || false"
             :placeholder="this.$props.placeholder || ''"
         />
-        <b-form-invalid-feedback
-                :id="'invalid-' + this.$props.name"
-        />
+        <b-form-invalid-feedback :id="'invalid-' + this.$props.name">
+            Bitte eine Nachricht eingeben!
+        </b-form-invalid-feedback>
     </b-form-group>
 </template>
 

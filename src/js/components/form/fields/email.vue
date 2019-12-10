@@ -13,9 +13,9 @@
             :required="this.$props.required || false"
             :placeholder="this.$props.placeholder || ''"
         />
-        <b-form-invalid-feedback
-                :id="'invalid-' + this.$props.name"
-        />
+        <b-form-invalid-feedback :id="'invalid-' + this.$props.name">
+            Bitte eine  Email-Adresse angeben!
+        </b-form-invalid-feedback>
     </b-form-group>
 </template>
 

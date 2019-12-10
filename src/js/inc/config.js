@@ -1,3 +1,6 @@
+// _keys.js must added manualy, cause is ignored by git
+import keys from './_keys'
+
 const myConfig = {
 	Location: {
 		address: "Ackerstrasse 169, 10115 Berlin",
@@ -9,8 +12,6 @@ const myConfig = {
 	},
 	apiURL: 'http://schoki2.loc',
 //    apiURL: 'https://test.schokoladen-mitte.de',
-	NOCAPTCHA_SITEKEY: '6Ld7xpcUAAAAAAJW5cBmgiMjmODSivStrY9d_SiI',
-	NOCAPTCHA_SECRET: '6Ld7xpcUAAAAAPxbgzpMsyrxH3gIUtQclsurPFjc',
-
+	NOCAPTCHA_SITEKEY: keys.NOCAPTCHA_SITEKEY,
 };
 export default myConfig

@@ -7,3 +7,4 @@ yarn-error.log
 /package-lock.json
 /mix-manifest.json
 /.htaccess
+/src/js/inc/.keys.js

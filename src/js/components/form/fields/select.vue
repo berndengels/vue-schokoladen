@@ -14,9 +14,9 @@
             :placeholder="this.$props.placeholder || ''"
             :selected="this.$props.selected || null"
         />
-        <b-form-invalid-feedback
-                :id="'invalid-' + this.$props.name"
-        />
+        <b-form-invalid-feedback :id="'invalid-' + this.$props.name">
+            Bitte eine Deine Musik Richtung auswählen!
+        </b-form-invalid-feedback>
     </b-form-group>
 </template>
 

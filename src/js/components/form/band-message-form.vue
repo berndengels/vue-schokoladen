@@ -1,6 +1,13 @@
 <template>
     <b-container>
-        <b-form id="frmBandMessage" @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form
+                novalidate
+                class="needs-validation"
+                id="frmBandMessage"
+                @submit="onSubmit"
+                @reset="onReset"
+                v-if="show"
+        >
             <SelectField
                     :field.sync="form.music_style_id"
                     name="music_style_id"
@@ -72,6 +79,11 @@
 		methods: {
 			onSubmit(e) {
 				e.preventDefault();
+				const form = document.getElementById('frmBandMessage');
+				if (form.checkValidity() === false) {
+					e.stopPropagation();
+				}
+				form.classList.add('was-validated');
                 console.info('v-model');
 				console.info(this.form)
             },
