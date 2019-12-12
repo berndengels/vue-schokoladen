@@ -531,3 +531,11 @@ div.paginator {
 		height: 20px;
 	}
 }
+
+form {
+	.invalid-feedback,
+	.validation-error {
+		font-weight: bold;
+		color: $sYellow;
+	}
+}

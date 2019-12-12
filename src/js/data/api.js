@@ -47,13 +47,28 @@ export const getMusicStyles = () => {
 			return err;
 		});
 };
-export const sendBandMessageForm = (data) => {
+export const getBandContactForm = () => {
 	return axiosCache
-		.get('/api/spa/musicStyles')
+		.get('/api/spa/contact/bands/fields')
 		.then(response => {
 			return response.data;
 		})
 		.catch(err => {
+			return err;
+		});
+};
+export const sendBandContactForm = (data) => {
+	return axiosCache
+		.post('/api/spa/contact/bands/send', data)
+		.then(response => {
+			if(200 == response.status) {
+				return response.data;
+			}
+		})
+		.catch(err => {
+			if(422 == err.response.status) {
+				return err.response.data;
+			}
 			return err;
 		});
 };

@@ -18,6 +18,7 @@ module.exports = {
         "iAxios": false,
         "axiosCache": false,
         "apiURL": false,
+        "grecaptcha": false,
 
     },
     "parserOptions": {
@@ -47,6 +48,8 @@ module.exports = {
         "no-empty": "off",
         "no-unused-vars": "off",
         "no-extra-boolean-cast": "off",
+        "no-mixed-spaces-and-tabs": "off",
         "indent": "off",
+        "strict": ["error", "never"],
     }
 };

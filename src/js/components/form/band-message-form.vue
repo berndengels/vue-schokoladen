@@ -1,113 +1,116 @@
 <template>
     <b-container>
-        <b-form
-                novalidate
-                class="needs-validation"
+        <div class="panel-body">
+            <b-form
                 id="frmBandMessage"
+                name="frmBandMessage"
                 @submit="onSubmit"
                 @reset="onReset"
-                v-if="show"
-        >
-            <SelectField
-                    :field.sync="form.music_style_id"
-                    name="music_style_id"
-                    label="Musik Style"
-                    :options="musicStyles"
-                    placeholder="Deine Musik Richtung"
-                    required
+            >
+            <vue-form-generator
+                :schema="schema"
+                :model="model"
+                :options="formOptions"
             />
-            <TextField
-                    :field.sync="form.name"
-                    name="name"
-                    label="Name"
-                    placeholder="Dein Name"
-                    required
+            <ReCaptchaField
+                name="recaptcha"
+                ref="recaptcha"
+                :field.sync="form.recaptcha"
+                @verify="onVerifiy"
             />
-            <EmailField
-                    :field.sync="form.email"
-                    name="email"
-                    label="Email"
-                    placeholder="Deine Email Adresse"
-                    required
-            />
-            <TextareaField
-                    :field.sync="form.message"
-                    name="message"
-                    label="Nachricht"
-                    placeholder="Deine Nachricht an uns"
-                    required
-            />
-            <CaptchaField />
             <ButtonField
-                    label="Senden"
-                    type="submit"
+                label="Senden"
+                type="submit"
             />
-        </b-form>
+            </b-form>
+        </div>
     </b-container>
 </template>
 
 <script>
-	import { BForm,BContainer } from 'bootstrap-vue'
-	import SelectField from './fields/select'
-    import TextField from './fields/text'
-	import EmailField from './fields/email'
-	import TextareaField from './fields/textarea'
-	import ButtonField from './fields/button'
-	import CaptchaField from './fields/captcha'
-    import { getMusicStyles } from '../../data/api'
+    import { getBandContactForm, sendBandContactForm } from '../../data/api'
+	import ReCaptchaField from './fields/recaptcha'
+	import ButtonField from "./fields/button";
+	import VueFormGenerator from "vue-form-generator";
+	import "vue-form-generator/dist/vfg.css";
 
 	export default {
         name: "BandMessageFrom",
-        components: { BForm, BContainer, SelectField, TextField, EmailField, TextareaField, ButtonField, CaptchaField },
+		components: {
+        	"vue-form-generator": VueFormGenerator.component,
+			ReCaptchaField,
+			ButtonField,
+        },
         data() {
             return {
-                name: '',
-                val: '',
-                form: {
-                    music_style_id:	null,
-                    name: '',
-                    email: '',
-                    message: '',
+            	form: {
+					recaptcha: '',
                 },
-                show: true,
-                musicStyles: [],
+            	model: null,
+                schema: null,
+				formOptions: null,
+				error: {
+					music_style_id:	null,
+					name: null,
+					email: null,
+					message: null,
+					recaptcha: null,
+                },
             }
         },
         created() {
-            this.getStyles()
+            this.getForm()
 		},
 		methods: {
+            onVerifiy(token) {
+				this.form.recaptcha = token;
+				document.getElementById('invalid-recaptcha').style.display = (token.length === 0) ? 'block' : 'none';
+            },
 			onSubmit(e) {
 				e.preventDefault();
-				const form = document.getElementById('frmBandMessage');
-				if (form.checkValidity() === false) {
-					e.stopPropagation();
-				}
-				form.classList.add('was-validated');
-                console.info('v-model');
-				console.info(this.form)
+
+				sendBandContactForm({ ...this.model, ...this.form })
+                    .then(response => {
+                    	const self = this;
+						if(response.errors) {
+							Object.keys(response.errors).forEach(function(key) {
+//								console.info("%s: %s", key, response.errors[key].shift());
+//								self.error[key] = response.errors[key].shift();
+							});
+							console.info('errors');
+							console.info(self.error);
+							return
+						}
+						console.info('response');
+						console.info(response)
+                    })
+                    .catch(response => {});
+				return true;
             },
 			onReset() {
-				this.form = {
+				this.model = {
+					music_style_id:	'',
+					name: '',
+					email: '',
+					message: '',
+					recaptcha: '',
+				};
+				this.error = {
 					music_style_id:	null,
-						name: '',
-						email: '',
-						message: '',
+					name: '',
+					email: '',
+					message: '',
+					recaptcha: '',
 				};
 			},
-			onValidationFeedback() {
-
-			},
-            getStyles() {
-				getMusicStyles()
+			getForm() {
+				getBandContactForm()
                     .then(response => {
-						const styles = response.map(item => {
-							return {
-								value: item.id,
-								text: item.name,
-							}
-						});
-						this.musicStyles = [{ text: "Bitte wählen ...", value: null }, ...styles]
+                    	if(response) {
+                    		this.model      = response.model,
+							this.schema      = response.schema;
+							this.formOptions = response.formOptions
+                        }
 					})
                     .catch(err => {
                         console.error(err)

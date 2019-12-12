@@ -9,11 +9,14 @@
             @change="onChange"
             :value="form.music_style_id"
             :id="'inp-' + this.$props.name"
+            :name="this.$props.name"
             :options="this.$props.options"
             :required="this.$props.required || false"
             :placeholder="this.$props.placeholder || ''"
             :selected="this.$props.selected || null"
+            :state="this.$props.state"
         />
+        <div class="validation-error">{{ this.$props.error }}</div>
         <b-form-invalid-feedback :id="'invalid-' + this.$props.name">
             Bitte eine Deine Musik Richtung auswählen!
         </b-form-invalid-feedback>
@@ -26,7 +29,7 @@
 	export default {
 		name: "SelectField",
 		components: { BFormGroup, BFormSelect, BFormInvalidFeedback },
-        props: ['field', 'name', 'required', 'placeholder', 'label', 'options', 'selected'],
+        props: ['field', 'state', 'name', 'required', 'placeholder', 'label', 'options', 'selected', 'error'],
 		data() {
 			return {
 				form: {

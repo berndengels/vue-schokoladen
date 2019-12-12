@@ -9,12 +9,15 @@
             @keyup="onChange"
             @change="onChange"
             :value="form.email"
+            :name="this.$props.name"
             :id="'inp-' + this.$props.name"
             :required="this.$props.required || false"
             :placeholder="this.$props.placeholder || ''"
+            :state="this.$props.state"
         />
+        <div class="validation-error">{{ this.$props.error }}</div>
         <b-form-invalid-feedback :id="'invalid-' + this.$props.name">
-            Bitte eine  Email-Adresse angeben!
+            Bitte eine valide Email-Adresse angeben!
         </b-form-invalid-feedback>
     </b-form-group>
 </template>
@@ -25,7 +28,7 @@
 	export default {
 		name: "EmailField",
 		components: { BFormGroup, BFormInput, BFormInvalidFeedback },
-        props: ['name', 'model', 'required', 'placeholder', 'label'],
+        props: ['name', 'state', 'model', 'required', 'placeholder', 'label', 'error'],
 		data() {
 			return {
 				form: {
