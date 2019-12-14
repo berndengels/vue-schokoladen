@@ -51,5 +51,6 @@ module.exports = {
         "no-mixed-spaces-and-tabs": "off",
         "indent": "off",
         "strict": ["error", "never"],
+        "no-unreachable": "off",
     }
 };

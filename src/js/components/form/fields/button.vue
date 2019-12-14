@@ -2,7 +2,7 @@
     <b-form-group>
         <b-button
             :variant="this.$props.variant || 'primary'"
-            :type="this.$props.type || 'submit'"
+            :type="this.$props.type || 'button'"
         >
         {{ this.$props.label || 'Enter' }}
         </b-button>
@@ -14,7 +14,7 @@
 	export default {
 		name: "ButtonField",
 		components: { BFormGroup, BButton },
-        props: ['label','type','variant','disabled'],
+        props: ['label','type','variant','handle'],
 	}
 </script>
 

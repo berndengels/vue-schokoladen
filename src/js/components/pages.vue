@@ -6,7 +6,7 @@
 
 <script>
 	import Page from "./pages/page";
-	import { getPage } from "../data/api";
+	import { getPage } from "../store/api";
 
 	export default {
 		name: "Pages",

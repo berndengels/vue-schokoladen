@@ -2,9 +2,12 @@
 /node_modules
 /public/js
 /public/css
+/public/images
 npm-debug.log
 yarn-error.log
 /package-lock.json
 /mix-manifest.json
 /.htaccess
 /src/js/inc/.keys.js
+/.env.dev
+/src/js/store/server/

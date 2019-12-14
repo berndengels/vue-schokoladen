@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import { getMenu } from "../data/api";
+    import { getMenu } from "../store/api";
 
     export default {
         name: "TopNavigation",

@@ -33,7 +33,7 @@
 	import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 	import EventModal from "./events/modal";
 	import { mapState } from 'vuex'
-    import store from "../data/store";
+    import store from "../store/store";
 
 	const paginatorLabels = {
 		first: '<i class="fas fa-step-backward"></i>',

@@ -477,7 +477,6 @@ pre {
 	color: #fff;
 }
 
-
 .carousel-wrapper {
 	width: 100%;
 	//	height: 300px;
@@ -537,5 +536,10 @@ form {
 	.validation-error {
 		font-weight: bold;
 		color: $sYellow;
+	}
+}
+.form-group {
+	.error {
+		background-color: $sYellow !important;
 	}
 }

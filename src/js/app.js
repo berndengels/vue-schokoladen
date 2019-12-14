@@ -10,7 +10,7 @@ import myConfig from "./inc/config";
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
 import BootstrapVue from 'bootstrap-vue'
-import store from "./data/store";
+import store from "./store/store";
 import { sync } from 'vuex-router-sync';
 import EventsPage from "./components/events";
 import Pages from "./components/pages";

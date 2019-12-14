@@ -1,11 +1,16 @@
 <template>
     <b-container>
-        <div class="panel-body">
+        <div v-if="loading" class="container">
+            <div class="row align-content-center mt-4">
+                <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" class="col justify-center" />
+            </div>
+        </div>
+        <div v-else class="panel-body">
             <b-form
                 id="frmBandMessage"
                 name="frmBandMessage"
-                @submit="onSubmit"
                 @reset="onReset"
+                @submit="submit"
             >
             <vue-form-generator
                 :schema="schema"
@@ -28,22 +33,29 @@
 </template>
 
 <script>
-    import { getBandContactForm, sendBandContactForm } from '../../data/api'
+    import { getBandContactForm, sendBandContactForm } from '../../store/api'
 	import ReCaptchaField from './fields/recaptcha'
 	import ButtonField from "./fields/button";
 	import VueFormGenerator from "vue-form-generator";
 	import "vue-form-generator/dist/vfg.css";
+	import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 	export default {
         name: "BandMessageFrom",
 		components: {
         	"vue-form-generator": VueFormGenerator.component,
+			PulseLoader,
 			ReCaptchaField,
 			ButtonField,
         },
         data() {
             return {
-            	form: {
+            	loading: true,
+				loader: {
+					color: "#007bff",
+					size: "1.0rem",
+				},
+				form: {
 					recaptcha: '',
                 },
             	model: null,
@@ -58,17 +70,18 @@
                 },
             }
         },
-        created() {
+		created() {
             this.getForm()
 		},
 		methods: {
+			onValidated(isValid, errors) {
+				console.log("Validation result: ", isValid, ", Errors:", errors);
+			},
             onVerifiy(token) {
 				this.form.recaptcha = token;
 				document.getElementById('invalid-recaptcha').style.display = (token.length === 0) ? 'block' : 'none';
             },
-			onSubmit(e) {
-				e.preventDefault();
-
+			submit(e) {
 				sendBandContactForm({ ...this.model, ...this.form })
                     .then(response => {
                     	const self = this;
@@ -107,15 +120,20 @@
 				getBandContactForm()
                     .then(response => {
                     	if(response) {
-                    		this.model      = response.model,
+                    		this.model       = response.model;
 							this.schema      = response.schema;
-							this.formOptions = response.formOptions
+							this.formOptions = response.formOptions;
+                            this.loading     = false
                         }
 					})
                     .catch(err => {
+						this.loading = false;
                         console.error(err)
                     })
             },
         },
 	}
+window.onload = () => {
+//	document.getElementById('musik-richtung').firstChild.selected = true
+}
 </script>
