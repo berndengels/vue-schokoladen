@@ -1,9 +1,6 @@
 <template>
     <div>
-        <h3 class="page-header mt-2">
-            Adresse
-        </h3>
-        <div class="col-12" id="address">
+        <div id="address">
             <div>
                 <span>{{ location.address }}</span><br>
                 <span>Fon: {{ location.fon }}</span><br>
@@ -66,7 +63,9 @@
         display: block;
         float: left;
         clear: both;
-        width: 400px;
+        width: 600px;
+        max-width: 100%;
         height: 400px;
+        max-height: 70%;
     }
 </style>

@@ -1,11 +1,11 @@
 <template>
-    <b-container>
+    <b-container class="m-4 mt-5">
         <div v-if="loading" class="container">
             <div class="row align-content-center mt-4">
                 <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" class="col justify-center" />
             </div>
         </div>
-        <div v-else class="panel-body">
+        <div v-else class="panel-body col-11 col-lg-6">
             <b-form
                 id="frmBandMessage"
                 name="frmBandMessage"

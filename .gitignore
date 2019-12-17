@@ -11,3 +11,4 @@ yarn-error.log
 /src/js/inc/.keys.js
 /.env.dev
 /src/js/store/server/
+/src/sass/orig.scss

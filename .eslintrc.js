@@ -41,6 +41,7 @@ module.exports = {
             "allowUsingIterationVar": true,
         }],
         "vue/singleline-html-element-content-newline": "off",
+        "vue/html-closing-bracket-newline": "off",
         "vue/html-indent": "off",
         "vue/attributes-order": "off",
         "vue/no-unused-components": "off",

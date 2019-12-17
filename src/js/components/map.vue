@@ -1,7 +1,9 @@
 <template>
-    <div class="col-12">
-        <Map />
-    </div>
+        <div class="row m-4 mt-5">
+            <div>
+                <Map />
+            </div>
+        </div>
 </template>
 
 <script>

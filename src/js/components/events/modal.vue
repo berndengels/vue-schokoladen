@@ -18,7 +18,9 @@
             </div>
             <div v-html="event.descriptionSanitized" />
             <div v-if="linkList">
-                <a :href="link" :key="idx" target="_blank" v-for="(link,idx) in linkList">{{ link }}</a><br>
+                <div v-for="(link,idx) in linkList" :key="idx">
+                    <a :href="link" target="_blank">{{ link }}</a>
+                </div>
             </div>
             <p />
         </b-modal>

@@ -1,28 +1,25 @@
 <template>
-    <div class="my-0">
-        <div v-if="loading" class="container">
-            <div class="row align-content-center mt-4">
-                <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" class="col justify-center" />
+    <div class="row m-2">
+        <div v-if="loading" class="col justify-content-center h-auto loader">
+            <div class="">
+                <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" class="" />
             </div>
         </div>
-        <div v-else>
-            <div class="clearfix p-0">
-                <div class="paginator ml-4 mt-2">
-                    <MyPaginator
-                        :items="events.data"
-                        :labels="paginatorLabels"
-                        :page-size="10"
-                        @changePage="onChangePage"
-                    />
-                </div>
-                <div class="text-center" />
-                <div class="row">
-                    <EventsData :page-of-items="pageOfItems" />
-                    <Calendar :event-dates="eventDates" @click-date="openModal" />
-                    <EventModal :event-data="selectedEvent" />
-                </div>
+        <div v-else class="col">
+            <div class="paginator ml-0">
+                <MyPaginator
+                    :items="events.data"
+                    :labels="paginatorLabels"
+                    :page-size="10"
+                    @changePage="onChangePage"
+                />
             </div>
+            <EventsData :page-of-items="pageOfItems" />
         </div>
+        <div class="col">
+            <Calendar :event-dates="eventDates" @click-date="openModal" />
+        </div>
+        <EventModal :event-data="selectedEvent" />
     </div>
 </template>
 
@@ -53,7 +50,7 @@
 		},
 		data() {
 			return {
-				category: this.$route.params.category || null,
+//				category: this.$route.params.category || null,
 				paginatorLabels,
 				selectedEvent: null,
 				pageOfItems: [],

@@ -1,19 +1,24 @@
 <template>
-    <div class="container col-12 m-0 p-0">
-        <TopNavigation />
-        <transition mode="out-in" name="fade">
-            <router-view />
-        </transition>
-        <BottomNavigation />
+    <div>
+        <TheTopMenu />
+        <div class="container col-12">
+            <transition mode="out-in" name="fade">
+                <router-view />
+            </transition>
+            <div class="background_right h-100">
+                <img class="h-100 img-responsive" src="/img/the_dark_art.png" width="66px" height="718px" alt="Darkside" title="Darlside">
+            </div>
+        </div>
+        <TheBottomMenu />
     </div>
 </template>
 <script>
-	import TopNavigation from "./components/top-navigation"
-	import BottomNavigation from "./components/bottom-navigation"
+	import TheTopMenu from "./components/menu/top"
+	import TheBottomMenu from "./components/menu/bottom"
 
 	export default {
 		name: "App",
-		components: { TopNavigation, BottomNavigation },
+		components: { TheTopMenu, TheBottomMenu },
 	}
 </script>
 

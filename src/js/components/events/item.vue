@@ -1,16 +1,24 @@
 <template>
-    <div class="eventContent col-12">
-        <b-card-header class="p-1 col-12" header-tag="header">
+    <div class="eventContent col-12 m-0 mt-2 p-0">
+        <b-card-header class="p-0 m-0 col-12" header-tag="header">
             <b-button block href="#" v-b-toggle="'accordion-' + index" variant="dark">
-                <div class="d-block float-left">
-                    <b>{{ dateTime }}</b> <span>{{ event.category }}</span>
+                <div class="row text-left">
+                    <div class="icnCategory col-1 justify-content-center">
+                        <div>
+                            <i class="icnCategory d-inline-block fa fa-music" :title="event.category" />
+                        </div>
+                    </div>
+                    <div class="titleWrapper col-11">
+                        <span class="dateTime shadow">{{ dateTime }}</span>
+                        <span v-if="event.theme" class="theme px-1">{{ event.theme }}</span>
+                        <br>
+                        <span class="title">{{ event.title }}</span>
+                    </div>
                 </div>
-                <div class="d-block">{{ event.title }}</div>
             </b-button>
         </b-card-header>
-        <b-collapse :id="'accordion-' + index" accordion="my-accordion" class="col-12" visible>
-            <b-card-body>
-                <h5 v-if="'' !== event.subtitle">{{ event.subtitle }}</h5>
+        <b-collapse :id="'accordion-' + index" accordion="my-accordion" class="col-12 m-0 p-0" visible>
+            <b-card-body class="m-0 p-0">
                 <div class="carousel-wrapper" v-if="images.length > 0">
                     <vue-flux v-if="images.length > 1"
                         :images="images"
@@ -30,7 +38,15 @@
                         :transitions="[]"
                     />
                 </div>
-                <b-card-text v-html="event.descriptionSanitized" />
+                <div v-if="'' !== event.subtitle">
+                    <span class="subtitle">{{ event.subtitle }}</span>
+                </div>
+                <b-card-text v-html="event.descriptionSanitized" class="description" />
+                <div v-if="linkList">
+                    <div v-for="(link,idx) in linkList" :key="idx" class="links">
+                        <a :href="link" target="_blank">{{ link }}</a>
+                    </div>
+                </div>
             </b-card-body>
         </b-collapse>
     </div>
@@ -54,15 +70,28 @@
 		},
 		props: ['event', 'index'],
 		computed: {
-			dateTime: function () {
-				return (new Date(this.event.date)).toLocaleDateString() + ' ' + this.event.time;
+            linkList: function () {
+                if (this.event.links) {
+                    return this.event.links.split("\n")
+                }
+                return null
+            },
+            dateTime: function () {
+                const strDate = (new Date(this.event.date)).toLocaleString('de-DE', {
+                    timeZone: 'Europe/Berlin',
+                    weekday: 'short',
+                    day: '2-digit',
+                    month: 'numeric',
+                    year: 'numeric',
+                });
+                return strDate.replace(/\.,/, '') + " " + this.event.time
             },
             images: function() {
-				const images = this.event.images;
-				if(images.length > 0) {
-					return images.map(img => myConfig.apiURL + '/media/images/' + img.internalName)
+                const images = this.event.images;
+                if (images.length > 0) {
+                    return images.map(img => myConfig.imageURL + img.internalName)
                 }
-				return []
+                return []
             },
         },
 	}

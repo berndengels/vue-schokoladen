@@ -1,6 +1,8 @@
 <template>
-    <div class="container">
-        <Page :page-data="data" />
+    <div class="row m-4">
+        <div class="mt-3">
+            <Page :data="data" :audios="audios" />
+        </div>
     </div>
 </template>
 
@@ -13,17 +15,29 @@
 		components: { Page },
 		data() {
 			return {
-				data: {},
+				data: {
+					title: '',
+                    body: '',
+                },
+                audios: null,
 			}
 		},
 		created() {
-			this.get()
+			this.get(this.$route.params.page)
+		},
+		beforeRouteUpdate (to, from, next) {
+			this.get(to.params.page);
+			next()
 		},
 		methods: {
-			get() {
-				getPage(this.$route.params.slug)
+			get(pageSlug) {
+				getPage(pageSlug)
 					.then(data => {
-						this.data = data
+						this.data = {
+							title: data.title,
+							body: data.body,
+                        };
+                        this.audios = data.audios || null
 					})
 					.catch(err => {
 						console.error(err)

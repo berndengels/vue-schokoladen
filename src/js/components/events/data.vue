@@ -1,10 +1,13 @@
 <template>
-    <div class="col">
+    <div>
         <div :key="index" class="event" v-for="(item, index) in pageOfItems">
             <EventItem
                 :event="item"
                 :index="index"
             />
+        </div>
+        <div class="row">
+            <div class="col h-50"><p>&nbsp;</p></div>
         </div>
     </div>
 </template>
