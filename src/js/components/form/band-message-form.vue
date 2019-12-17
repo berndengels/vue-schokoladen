@@ -1,14 +1,15 @@
 <template>
-    <b-container class="m-4 mt-5">
-        <div v-if="loading" class="container">
-            <div class="row align-content-center mt-4">
-                <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" class="col justify-center" />
+    <b-container class="row m-2">
+        <div v-if="loading" class="col-11 col-lg-6 justify-content-center h-auto loader">
+            <div class="">
+                <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" />
             </div>
         </div>
         <div v-else class="panel-body col-11 col-lg-6">
             <b-form
                 id="frmBandMessage"
                 name="frmBandMessage"
+                class="mt-2"
                 @reset="onReset"
                 @submit="submit"
             >

@@ -2,7 +2,7 @@
     <div class="row m-2">
         <div v-if="loading" class="col justify-content-center h-auto loader">
             <div class="">
-                <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" class="" />
+                <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" />
             </div>
         </div>
         <div v-else class="col">
