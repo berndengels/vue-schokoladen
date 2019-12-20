@@ -64,6 +64,9 @@ export const sendBandContactForm = (data) => {
 			if(200 == response.status) {
 				return response.data;
 			}
+			else if(422 == response.status) {
+				return response.data;
+			}
 		})
 		.catch(err => {
 			if(422 == err.response.status) {

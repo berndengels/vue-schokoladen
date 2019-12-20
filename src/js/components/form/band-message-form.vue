@@ -10,31 +10,28 @@
                 id="frmBandMessage"
                 name="frmBandMessage"
                 class="mt-2"
-                @reset="onReset"
-                @submit="submit"
+                @reset.prevent="onReset"
+                @submit.prevent="onSubmit"
             >
-            <vue-form-generator
-                :schema="schema"
-                :model="model"
-                :options="formOptions"
-            />
-            <ReCaptchaField
-                name="recaptcha"
-                ref="recaptcha"
-                :field.sync="form.recaptcha"
-                @verify="onVerifiy"
-            />
-            <ButtonField
-                label="Senden"
-                type="submit"
-            />
+                <vue-form-generator
+                    :schema="schema"
+                    :model="model"
+                    :options="formOptions"
+                    @validated="onValidated"
+                />
+                <ReCaptchaField
+                    name="recaptcha"
+                    ref="recaptcha"
+                    :field.sync="form.recaptcha"
+                    @verify="onVerifiy"
+                />
             </b-form>
         </div>
     </b-container>
 </template>
 
 <script>
-    import { getBandContactForm, sendBandContactForm } from '../../store/api'
+	import { getBandContactForm, sendBandContactForm } from '../../store/api'
 	import ReCaptchaField from './fields/recaptcha'
 	import ButtonField from "./fields/button";
 	import VueFormGenerator from "vue-form-generator";
@@ -57,7 +54,10 @@
 					size: "1.0rem",
 				},
 				form: {
-					recaptcha: '',
+					recaptcha: {
+						token: '',
+                        error: '',
+                    },
                 },
             	model: null,
                 schema: null,
@@ -76,20 +76,24 @@
 		},
 		methods: {
 			onValidated(isValid, errors) {
-				console.log("Validation result: ", isValid, ", Errors:", errors);
+//				console.log("Validation result: ", isValid, ", Errors:", errors);
 			},
             onVerifiy(token) {
-				this.form.recaptcha = token;
+				this.form.recaptcha.token = token;
 				document.getElementById('invalid-recaptcha').style.display = (token.length === 0) ? 'block' : 'none';
             },
-			submit(e) {
+			onSubmit(e) {
+				document.getElementById('invalid-recaptcha').style.display = (this.form.recaptcha.token.length === 0) ? 'block' : 'none';
+                if(this.form.recaptcha.token.length === 0) {
+                	return false;
+                }
 				sendBandContactForm({ ...this.model, ...this.form })
                     .then(response => {
                     	const self = this;
 						if(response.errors) {
 							Object.keys(response.errors).forEach(function(key) {
-//								console.info("%s: %s", key, response.errors[key].shift());
-//								self.error[key] = response.errors[key].shift();
+								console.info("%s: %s", key, response.errors[key].shift());
+								self.error[key] = response.errors[key].shift();
 							});
 							console.info('errors');
 							console.info(self.error);
@@ -98,7 +102,10 @@
 						console.info('response');
 						console.info(response)
                     })
-                    .catch(response => {});
+                    .catch(err => {
+						console.error('form send error');
+						console.error(err)
+                    });
 				return true;
             },
 			onReset() {
@@ -124,7 +131,7 @@
                     		this.model       = response.model;
 							this.schema      = response.schema;
 							this.formOptions = response.formOptions;
-                            this.loading     = false
+                            this.loading     = false;
                         }
 					})
                     .catch(err => {
@@ -134,7 +141,4 @@
             },
         },
 	}
-window.onload = () => {
-//	document.getElementById('musik-richtung').firstChild.selected = true
-}
 </script>

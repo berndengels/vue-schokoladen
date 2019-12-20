@@ -1,7 +1,8 @@
 // _keys.js must added manualy, cause is ignored by git
 import keys from './_keys'
 const apiURL = 'http://schoki2.loc';
-const apiLiveURL = 'https://www.schokoladen-mitte.de';
+//const apiURL = 'https://test.schokoladen-mitte.de';
+const apiLiveURL = 'https://test.schokoladen-mitte.de';
 
 const myConfig = {
 	Location: {

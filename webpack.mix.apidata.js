@@ -41,7 +41,7 @@ mix
             },
             {
                 'url': 'http://schoki2.loc/api/spa/contact/bands/fields',
-                'dest': 'src/js/data/server/contact/form/bands',
+                'dest': 'src/js/store/server/form/contact/bands',
             },
         ],
     })

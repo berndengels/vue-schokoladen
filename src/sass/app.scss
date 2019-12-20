@@ -332,6 +332,26 @@ $field-switch-height: 25px;
 		&.featured label {
 			font-weight: bold;
 		}
+		&.required {
+			&.error {
+				color: $sYellow;
+				input, select, textarea {
+					background-color: #fff;
+					border: #f00;
+				}
+			}
+			.errors {
+				&.help-block {
+					flex: 1 1 100%;
+					text-align: right;
+					span {
+						width: auto;
+						color: $sYellow;
+						display: inline;
+					}
+				}
+			}
+		}
 		&.required label::after {
 			content: "*";
 			font-weight: normal;
