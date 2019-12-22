@@ -10,6 +10,7 @@ const myConfig = {
 		lng: 13.397245,
 		zoom: 15,
 	},
+	originURL: _env.url.ORIGIN,
 	apiURL: _env.url.API,
 	imageURL: _env.url.MEDIA + '/images/',
 	audioURL: _env.url.MEDIA + '/audios/',

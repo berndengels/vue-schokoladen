@@ -23,7 +23,8 @@ const axiosCache = window.axiosCache = setup({
         ...axios.defaults.headers,
         common: {
             ...axios.defaults.headers.common,
-            "X-Requested-With": "XMLHttpRequest",
+            'X-Requested-With': 'XMLHttpRequest',
+			'Origin': myConfig.originURL,
         },
     },
     timeout: 5000,
