@@ -8,6 +8,7 @@ export const getEvents = (category = null) => {
 			return response.data;
 		})
 		.catch(err => {
+			alert(err);
 			return err;
 		});
 };
