@@ -16,18 +16,18 @@ const store = new Vuex.Store({
 		error: null,
 	},
 	getters: {
-		"error":		(state) => state.error,
-		"events":		(state) => state.events,
-		"loading":		(state) => state.loading,
-		"eventDates":	(state) => state.eventDates,
+		"error":		function (state) { return state.error },
+		"events":		function (state) { return state.events },
+		"loading":		function (state) { return state.loading },
+		"eventDates":	function (state) { return state.eventDates },
 	},
 	actions: {
-		"GET_EVENTS": ({ commit }, payload) => {
+		"GET_EVENTS": function ({ commit }, payload) {
 			const category = payload.category;
 			const url = !!category ? '/api/spa/events/category/' + category : '/api/spa/events';
 			axiosCache
 				.get(url)
-				.then(response => {
+				.then(function (response) {
 					const events = {
 						category: category,
 						data: response.data,
@@ -35,19 +35,19 @@ const store = new Vuex.Store({
 					};
 					commit('SET_EVENTS', events)
 				})
-				.catch(err => {
+				.catch(function (err) {
 					commit('SET_ERROR', err)
 				})
 		},
 	},
 	mutations: {
-		SET_EVENTS: (state, events) => {
+		SET_EVENTS: function (state, events) {
 			state.loading		= false;
 			state.events		= events;
 			state.error			= null;
 			state.eventDates	= events.data.map(item => item.date.split(' ').shift())
 		},
-		SET_ERROR: (state, error) => {
+		SET_ERROR: function (state, error) {
 			state.loading		= false;
 			state.events		= null;
 			state.error			= error;
