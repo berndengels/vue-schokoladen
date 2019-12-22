@@ -1,5 +1,9 @@
 <template>
     <div class="row m-2">
+        <div v-if="error">
+            <h3>Error</h3>
+            {{ error }}
+        </div>
         <div v-if="loading" class="col justify-content-center h-auto loader">
             <div class="">
                 <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" />
@@ -50,7 +54,6 @@
 		},
 		data() {
 			return {
-//				category: this.$route.params.category || null,
 				paginatorLabels,
 				selectedEvent: null,
 				pageOfItems: [],
@@ -73,6 +76,7 @@
                 }));
 		},
 		computed: mapState([
+			'error',
 			'events',
 			'loading',
 			'eventDates',

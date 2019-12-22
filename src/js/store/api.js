@@ -8,7 +8,6 @@ export const getEvents = function(category = null) {
 			return response.data;
 		})
 		.catch(function(err) {
-			alert(err);
 			return err;
 		});
 };
