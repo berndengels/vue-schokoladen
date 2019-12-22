@@ -4,7 +4,7 @@ try {
 } catch (e) {}
 
 const Vue = window.Vue = require('vue');
-const axios = window.axios = require('axios');
+const axios = require('axios');
 import { setup } from 'axios-cache-adapter'
 import myConfig from "./inc/config";
 import VueRouter from 'vue-router';
@@ -13,20 +13,16 @@ import BootstrapVue from 'bootstrap-vue'
 import routes from "./router";
 import store from "./store/store";
 import { sync } from 'vuex-router-sync';
-import EventsPage from "./components/events";
-import Pages from "./components/pages";
-import MapPage from "./components/map";
-import BandMessageFrom from './components/form/band-message-form';
 import App from './App.vue';
 import VCalendar from 'v-calendar'
 
 const axiosCache = window.axiosCache = setup({
-    ...window.axios.defaults,
+    ...axios.defaults,
     baseURL: myConfig.apiURL,
     headers: {
-        ...window.axios.defaults.headers,
+        ...axios.defaults.headers,
         common: {
-            ...window.axios.defaults.headers.common,
+            ...axios.defaults.headers.common,
             "X-Requested-With": "XMLHttpRequest",
         },
     },

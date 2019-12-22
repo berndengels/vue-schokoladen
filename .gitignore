@@ -9,6 +9,6 @@ yarn-error.log
 /mix-manifest.json
 /.htaccess
 /src/js/inc/.keys.js
-/.env.dev
 /src/js/store/server/
 /src/sass/orig.scss
+/src/js/inc/_env.js

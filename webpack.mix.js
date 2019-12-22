@@ -1,10 +1,12 @@
 const mix = require('laravel-mix');
-require('mix-env-file');
 
 if (process.env.section) {
     require(`${__dirname}/webpack.mix.${process.env.section}.js`);
 } else {
     mix.webpackConfig({
+        node: {
+            fs: 'empty',
+        },
         module: {
             rules: [{
                 enforce: 'pre',
@@ -14,7 +16,7 @@ if (process.env.section) {
             }]
         }
     });
-    mix.env(process.env.ENV_FILE)
+    mix
         .js('src/js/app.js', 'public/js')
         .sass('src/sass/app.scss', 'public/css')
         .minify(['public/js/app.js','public/css/app.css'])

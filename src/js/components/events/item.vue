@@ -3,12 +3,12 @@
         <b-card-header class="p-0 m-0 col-12" header-tag="header">
             <b-button block href="#" v-b-toggle="'accordion-' + index" variant="dark">
                 <div class="row text-left">
-                    <div class="icnCategory col-1 justify-content-center">
+                    <div class="icnCategory d-none d-lg-inline-block col-lg-1 justify-content-center">
                         <div>
                             <i class="icnCategory d-inline-block fa fa-music" :title="event.category" />
                         </div>
                     </div>
-                    <div class="titleWrapper col-11">
+                    <div class="titleWrapper col-sm-12 col-lg-11">
                         <span class="dateTime shadow">{{ dateTime }}</span>
                         <span v-if="event.theme" class="theme px-1">{{ event.theme }}</span>
                         <br>

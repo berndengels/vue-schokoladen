@@ -1,8 +1,5 @@
-// _keys.js must added manualy, cause is ignored by git
-import keys from './_keys'
-const apiURL = 'http://schoki2.loc';
-//const apiURL = 'https://test.schokoladen-mitte.de';
-const apiLiveURL = 'https://test.schokoladen-mitte.de';
+// _env.js must added manualy, cause is ignored by git
+import _env from './_env'
 
 const myConfig = {
 	Location: {
@@ -13,14 +10,10 @@ const myConfig = {
 		lng: 13.397245,
 		zoom: 15,
 	},
-	apiURL: apiURL,
-//    apiURL: 'https://test.schokoladen-mitte.de',
-	imageURL: apiLiveURL + '/media/images/',
-	audioURL: apiLiveURL + '/media/audios/',
-
-	NOCAPTCHA_SITEKEY: keys.NOCAPTCHA_SITEKEY,
-	NOCAPTCHA_SITEKEY_INVISIBLE: keys.NOCAPTCHA_SITEKEY_INVISIBLE,
-	NOCAPTCHA_SITEKEY_v3: keys.NOCAPTCHA_SITEKEY_v3,
+	apiURL: _env.url.API,
+	imageURL: _env.url.MEDIA + '/images/',
+	audioURL: _env.url.MEDIA + '/audios/',
+	NOCAPTCHA_SITEKEY: _env.nocaptcha.NOCAPTCHA_SITEKEY,
 };
 
 export default myConfig

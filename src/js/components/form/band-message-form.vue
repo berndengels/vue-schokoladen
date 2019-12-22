@@ -6,26 +6,32 @@
             </div>
         </div>
         <div v-else class="panel-body col-11 col-lg-6">
-            <b-form
-                id="frmBandMessage"
-                name="frmBandMessage"
-                class="mt-2"
-                @reset.prevent="onReset"
-                @submit.prevent="onSubmit"
-            >
-                <vue-form-generator
-                    :schema="schema"
-                    :model="model"
-                    :options="formOptions"
-                    @validated="onValidated"
-                />
-                <ReCaptchaField
-                    name="recaptcha"
-                    ref="recaptcha"
-                    :field.sync="form.recaptcha"
-                    @verify="onVerifiy"
-                />
-            </b-form>
+            <div v-if="form.response.success" class="mt-3">
+                <h3>Deine Nachricht wurde erfolgreich abgeschickt</h3>
+                <div class="mt-2" v-html="form.response.message" />
+            </div>
+            <div v-else>
+                <b-form
+                        id="frmBandMessage"
+                        name="frmBandMessage"
+                        class="mt-2"
+                        @reset.prevent="onReset"
+                        @submit="onSubmit"
+                >
+                    <vue-form-generator
+                            :schema="schema"
+                            :model="model"
+                            :options="formOptions"
+                            @validated="onValidated"
+                    />
+                    <ReCaptchaField
+                            name="recaptcha"
+                            ref="recaptcha"
+                            :field.sync="form.recaptcha"
+                            @verify="onVerifiy"
+                    />
+                </b-form>
+            </div>
         </div>
     </b-container>
 </template>
@@ -54,9 +60,20 @@
 					size: "1.0rem",
 				},
 				form: {
+            		response: {
+            			success: false,
+            			error: null,
+                        message: '',
+                    },
 					recaptcha: {
 						token: '',
                         error: '',
+                    },
+                    submitButton: {
+						type: 'submit',
+						buttonText: 'Submit',
+						validateBeforeSubmit: true,
+						onSubmit: this.onSubmit,
                     },
                 },
             	model: null,
@@ -87,6 +104,7 @@
                 if(this.form.recaptcha.token.length === 0) {
                 	return false;
                 }
+                this.loading = true;
 				sendBandContactForm({ ...this.model, ...this.form })
                     .then(response => {
                     	const self = this;
@@ -99,9 +117,15 @@
 							console.info(self.error);
 							return
 						}
+						this.form.response = {
+							success: true,
+                            error: null,
+                            message: response.data.message.replace(/[\n\r]/g,'<br>'),
+                        };
 						console.info('response');
-						console.info(response)
-                    })
+						console.info(response);
+						this.loading = false
+					})
                     .catch(err => {
 						console.error('form send error');
 						console.error(err)
@@ -133,6 +157,8 @@
 							this.formOptions = response.formOptions;
                             this.loading     = false;
                         }
+                        // add a submit button
+                    	this.schema.fields.push(this.form.submitButton)
 					})
                     .catch(err => {
 						this.loading = false;
