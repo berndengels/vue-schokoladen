@@ -9,7 +9,7 @@
                 <pulse-loader :color="loader.color" :loading="loading" :size="loader.size" />
             </div>
         </div>
-        <div v-else class="col">
+        <div v-else class="col flex-grow-1">
             <div class="paginator ml-0">
                 <MyPaginator
                     :items="events.data"
@@ -20,9 +20,9 @@
             </div>
             <EventsData :page-of-items="pageOfItems" />
         </div>
-        <div class="col">
+        <!--div class="col">
             <Calendar :event-dates="eventDates" @click-date="openModal" />
-        </div>
+        </div-->
         <EventModal :event-data="selectedEvent" />
     </div>
 </template>

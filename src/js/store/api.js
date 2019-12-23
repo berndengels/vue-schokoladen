@@ -1,7 +1,8 @@
 import { menuTypes } from "../inc/const";
 
-export const getEvents = function(category = null) {
-	const url = category ? '/api/spa/events/category/' + category : '/api/events';
+export const getEvents = function(category) {
+
+	const url = "undefined" !== category ? '/api/spa/events/category/' + category : '/api/events';
 	return axiosCache
 		.get(url)
 		.then(response => {
