@@ -77,7 +77,7 @@
                 return null
             },
             dateTime: function () {
-                const strDate = (new Date(this.event.date)).toLocaleString('de-DE', {
+                const strDate = (new Date(this.event.date.split(' ').shift())).toLocaleString('de-DE', {
                     timeZone: 'Europe/Berlin',
                     weekday: 'short',
                     day: '2-digit',
