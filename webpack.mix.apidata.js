@@ -3,7 +3,6 @@ require('laravel-mix-dload');
 require('mix-env-file');
 
 mix
-    .env(process.env.ENV_FILE)
     .download({
         enabled: true,
         urls: [
