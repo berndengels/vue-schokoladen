@@ -111,7 +111,7 @@
 				console.info('collapseId: %s %s', collapseId, isJustShown);
                 if(isJustShown && "undefined" != typeof this.$refs.slider) {
                     this.$refs.slider.resize();
-                    console.info(this.$refs.slider);
+//                    console.info(this.$refs.slider);
                 }
 			})
 		},
