@@ -543,6 +543,6 @@ form {
 	border: 1px solid $sYellow;
 
 	@include media("<tablet") {
-		max-height: 300px;
+		max-height: 350px;
 	}
 }
