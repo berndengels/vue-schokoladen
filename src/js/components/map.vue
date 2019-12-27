@@ -1,6 +1,6 @@
 <template>
         <div class="row m-4">
-            <div class="mt-3">
+            <div class="mt-3 col-sm-12 col-lg-8">
                 <Map />
             </div>
         </div>

@@ -536,3 +536,9 @@ form {
 		}
 	}
 }
+#map {
+	width: 100%;
+	height: 500px;
+	max-height: 75%;
+	border: 1px solid $sYellow;
+}

@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <div id="address">
-            <div>
+    <div class="flex-grow-1">
+        <div class="row">
+            <div class="col-12">
                 <span>{{ location.address }}</span><br>
                 <span>Fon: {{ location.fon }}</span><br>
                 <span>Email: <a :href="'mailto:' + location.email" target="_blank">{{ location.email }}</a></span>
             </div>
         </div>
-        <div class="mt-2" id="map">
-            <l-map :center="center" :zoom="zoom" style="height: 100%; width: 100%">
+        <div class="row mt-2">
+            <l-map id="map" :center="center" :zoom="zoom" class="col-12">
                 <l-tile-layer :url="url" />
                 <l-marker :lat-lng="markerLatLng" @add="openPopup">
                     <l-popup :options="{ autoClose: false, closeOnClick: false }">
@@ -58,14 +58,3 @@
 		},
 	}
 </script>
-<style scoped>
-    div#map {
-        display: block;
-        float: left;
-        clear: both;
-        width: 600px;
-        max-width: 100%;
-        height: 400px;
-        max-height: 70%;
-    }
-</style>
