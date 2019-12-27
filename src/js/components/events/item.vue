@@ -20,28 +20,32 @@
         <b-collapse :id="'accordion-' + index" accordion="my-accordion" class="col-12 m-0 p-0" visible>
             <b-card-body class="m-0 p-0">
                 <div class="carousel-wrapper" v-if="images.length > 0">
-                    <vue-flux v-if="images.length > 1"
-                        :images="images"
-                        :options="{ autoplay: true }"
-                        :transitions="['kenburn', 'cube', 'book']"
-                    >
-                        <template v-slot:controls>
-                            <flux-controls />
-                        </template>
-                        <template v-slot:pagination>
-                            <flux-pagination />
-                        </template>
-                    </vue-flux>
-                    <vue-flux v-else
-                        :images="images"
-                        :options="{ autoplay: false }"
-                        :transitions="[]"
-                    />
+                    <flux-wrapper :style="baseStyle" ref="wrapper">
+                        <vue-flux v-if="images.length > 1"
+                                  :images="images"
+                                  :options="{ autoplay: true }"
+                                  :transitions="['kenburn', 'cube', 'book']"
+                                  ref="slider"
+                        >
+                            <template v-slot:controls>
+                                <flux-controls />
+                            </template>
+                            <template v-slot:pagination>
+                                <flux-pagination />
+                            </template>
+                        </vue-flux>
+                        <vue-flux v-else
+                                  :images="images"
+                                  :options="{ autoplay: false }"
+                                  :transitions="[]"
+                                  ref="slider"
+                        />
+                    </flux-wrapper>
                 </div>
                 <div v-if="'' !== event.subtitle">
                     <span class="subtitle">{{ event.subtitle }}</span>
                 </div>
-                <b-card-text v-html="event.descriptionSanitized" class="description" />
+                <b-card-text v-html="event.description" class="description" />
                 <div v-if="linkList">
                     <div v-for="(link,idx) in linkList" :key="idx" class="links">
                         <a :href="link" target="_blank">{{ link }}</a>
@@ -53,13 +57,14 @@
 </template>
 
 <script>
-	import { FluxControls, FluxPagination, VueFlux } from 'vue-flux';
+	import { FluxControls, FluxPagination, VueFlux, FluxWrapper } from 'vue-flux';
 	import myConfig from "../../inc/config";
 
 	export default {
 		name: "EventItem",
 		components: {
 			VueFlux,
+			FluxWrapper,
 			FluxControls,
 			FluxPagination,
 		},
@@ -69,6 +74,13 @@
 			},
 		},
 		props: ['event', 'index'],
+        data() {
+			return {
+				baseStyle: {
+					overflow: 'hidden',
+				},
+            }
+        },
 		computed: {
             linkList: function () {
                 if (this.event.links) {
@@ -94,5 +106,14 @@
                 return []
             },
         },
+		mounted() {
+			this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
+				console.info('collapseId: %s %s', collapseId, isJustShown);
+                if(isJustShown && "undefined" != typeof this.$refs.slider) {
+                    this.$refs.slider.resize();
+                    console.info(this.$refs.slider);
+                }
+			})
+		},
 	}
 </script>
