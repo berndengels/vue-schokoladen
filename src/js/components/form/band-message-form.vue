@@ -12,23 +12,23 @@
             </div>
             <div v-else>
                 <b-form
-                        id="frmBandMessage"
-                        name="frmBandMessage"
-                        class="mt-2"
-                        @reset.prevent="onReset"
-                        @submit="onSubmit"
+                    id="frmBandMessage"
+                    name="frmBandMessage"
+                    class="mt-2"
+                    @reset.prevent="onReset"
+                    @submit="onSubmit"
                 >
                     <vue-form-generator
-                            :schema="schema"
-                            :model="model"
-                            :options="formOptions"
-                            @validated="onValidated"
+                        :schema="contactForm.schema"
+                        :model="contactForm.model"
+                        :options="contactForm.formOptions"
+                        @validated="onValidated"
                     />
                     <ReCaptchaField
-                            name="recaptcha"
-                            ref="recaptcha"
-                            :field.sync="form.recaptcha"
-                            @verify="onVerifiy"
+                        name="recaptcha"
+                        ref="recaptcha"
+                        :field.sync="form.recaptcha"
+                        @verify="onVerifiy"
                     />
                 </b-form>
             </div>
@@ -43,6 +43,8 @@
 	import VueFormGenerator from "vue-form-generator";
 	import "vue-form-generator/dist/vfg.css";
 	import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+	import { mapState } from 'vuex'
+	import store from "../../store/store";
 
 	export default {
         name: "BandMessageFrom",
@@ -54,7 +56,6 @@
         },
         data() {
             return {
-            	loading: true,
 				loader: {
 					color: "#007bff",
 					size: "1.0rem",
@@ -76,10 +77,10 @@
 						onSubmit: this.onSubmit,
                     },
                 },
-            	model: null,
-                schema: null,
+				model: null,
+				schema: null,
 				formOptions: null,
-				error: {
+				formError: {
 					music_style_id:	null,
 					name: null,
 					email: null,
@@ -88,82 +89,78 @@
                 },
             }
         },
-		created() {
-            this.getForm()
+		computed: {
+			contactForm() {
+                return this.$store.state.contactForm
+            },
+            error() {
+				return this.$store.state.error
+            },
+			loading: {
+				get(){
+					return this.$store.state.loading
+				},
+				set(val){
+					return val
+				},
+			},
+		},
+        created() {
+            store.dispatch('GET_CONTACT_FORM', { form: this.form });
 		},
 		methods: {
-			onValidated(isValid, errors) {
+            onValidated(isValid, errors) {
 //				console.log("Validation result: ", isValid, ", Errors:", errors);
-			},
-            onVerifiy(token) {
-				this.form.recaptcha.token = token;
-				document.getElementById('invalid-recaptcha').style.display = (token.length === 0) ? 'block' : 'none';
             },
-			onSubmit(e) {
-				document.getElementById('invalid-recaptcha').style.display = (this.form.recaptcha.token.length === 0) ? 'block' : 'none';
+            onVerifiy(token) {
+                this.form.recaptcha.token = token;
+                document.getElementById('invalid-recaptcha').style.display = (token.length === 0) ? 'block' : 'none';
+            },
+            onSubmit(e) {
+                document.getElementById('invalid-recaptcha').style.display = (this.form.recaptcha.token.length === 0) ? 'block' : 'none';
                 if(this.form.recaptcha.token.length === 0) {
-                	return false;
+                    return false;
                 }
                 this.loading = true;
-				sendBandContactForm({ ...this.model, ...this.form })
+
+                sendBandContactForm({ ...this.contactForm.model, ...this.form })
                     .then(response => {
-                    	const self = this;
-						if(response.errors) {
-							Object.keys(response.errors).forEach(function(key) {
-								console.info("%s: %s", key, response.errors[key].shift());
-								self.error[key] = response.errors[key].shift();
-							});
-							console.info('errors');
-							console.info(self.error);
-							return
-						}
-						this.form.response = {
-							success: true,
+                        const self = this;
+                        if(response.errors) {
+                            Object.keys(response.errors).forEach(function(key) {
+                                console.info("%s: %s", key, response.errors[key].shift());
+                                self.formError[key] = response.errors[key].shift();
+                            });
+                            return
+                        }
+                        this.form.response = {
+                            success: true,
                             error: null,
                             message: response.data.message.replace(/[\n\r]/g,'<br>'),
                         };
-						console.info('response');
-						console.info(response);
-						this.loading = false
-					})
-                    .catch(err => {
-						console.error('form send error');
-						console.error(err)
-                    });
-				return true;
-            },
-			onReset() {
-				this.model = {
-					music_style_id:	'',
-					name: '',
-					email: '',
-					message: '',
-					recaptcha: '',
-				};
-				this.error = {
-					music_style_id:	null,
-					name: '',
-					email: '',
-					message: '',
-					recaptcha: '',
-				};
-			},
-			getForm() {
-				getBandContactForm()
-                    .then(response => {
-                    	if(response) {
-                    		this.model       = response.model;
-							this.schema      = response.schema;
-							this.formOptions = response.formOptions;
-                            this.loading     = false;
-                        }
-                        // add a submit button
-                    	this.schema.fields.push(this.form.submitButton)
-					})
-                    .catch(err => {
-						this.loading = false;
-                        console.error(err)
+                        this.loading = false
                     })
+                    .catch(err => {
+                        console.error('form send error');
+                        console.error(err)
+                    });
+                return true;
+            },
+            onReset() {
+                this.model = {
+                    music_style_id:	'',
+                    name: '',
+                    email: '',
+                    message: '',
+                    recaptcha: '',
+                };
+                this.formError = {
+                    music_style_id:	null,
+                    name: '',
+                    email: '',
+                    message: '',
+                    recaptcha: '',
+                };
             },
         },
 	}

@@ -1,9 +1,9 @@
 <template>
-    <div class="col-12 col-lg-8">
+    <div v-if="this.$props.data" class="col-12 col-lg-8">
         <h5>{{ this.$props.data.title }}</h5>
         <div v-html="this.$props.data.body" />
-        <div v-if="this.$props.audios" class="audios">
-            <div v-for="audio in this.$props.audios" :key="audio.id">
+        <div v-if="this.$props.data.audios" class="audios">
+            <div v-for="audio in this.$props.data.audios" :key="audio.id">
                 <aplayer :float="true"
                      :music="{
                 	    theme: '#000000',

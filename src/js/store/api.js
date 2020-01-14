@@ -36,16 +36,6 @@ export const getPage = (slug) => {
 			return err;
 		});
 };
-export const getMusicStyles = () => {
-	return iAxios
-		.get('/api/spa/musicStyles')
-		.then(function(response) {
-			return response.data;
-		})
-		.catch(function(err) {
-			return err;
-		});
-};
 export const getBandContactForm = () => {
 	return iAxios
 		.get('/api/spa/contact/bands/fields')

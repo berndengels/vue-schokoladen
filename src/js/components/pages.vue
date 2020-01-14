@@ -1,47 +1,38 @@
 <template>
     <div class="row m-4">
         <div class="mt-3">
-            <Page :data="data" :audios="audios" />
+            <Page :data="page" />
         </div>
     </div>
 </template>
 
 <script>
 	import Page from "./pages/page";
-	import { getPage } from "../store/api";
+	import store from "../store/store";
 
 	export default {
 		name: "Pages",
 		components: { Page },
-		data() {
-			return {
-				data: {
-					title: '',
-                    body: '',
-                },
-                audios: null,
-			}
-		},
-		created() {
-			this.get(this.$route.params.page)
+		beforeRouteEnter (to, from, next) {
+			store.dispatch('GET_PAGE', { slug: to.params.page })
+				.then(() => next(vm => {
+					vm.page = to.params.page
+				}));
 		},
 		beforeRouteUpdate (to, from, next) {
-			this.get(to.params.page);
-			next()
+			store.dispatch('GET_PAGE', { slug: to.params.page })
+				.then(() => next(vm => {
+					vm.page = to.params.page
+				}));
 		},
-		methods: {
-			get(pageSlug) {
-				getPage(pageSlug)
-					.then(data => {
-						this.data = {
-							title: data.title,
-							body: data.body,
-                        };
-                        this.audios = data.audios || null
-					})
-					.catch(err => {
-						console.error(err)
-					})
+		computed: {
+			page: {
+				get(){
+					return this.$store.state.page
+				},
+				set(page){
+					return page
+				},
 			},
 		},
 	}

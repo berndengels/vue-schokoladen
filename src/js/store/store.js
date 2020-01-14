@@ -12,6 +12,16 @@ const store = new Vuex.Store({
 			count: 0,
 		},
 		eventDates: [],
+		contactForm: {
+			schema: {},
+			model: {},
+			formOptions: {},
+		},
+		page: {
+			title: '',
+			body: '',
+			audios: [],
+		},
 		loading: true,
 		error: null,
 	},
@@ -20,6 +30,8 @@ const store = new Vuex.Store({
 		"events":		function (state) { return state.events },
 		"loading":		function (state) { return state.loading },
 		"eventDates":	function (state) { return state.eventDates },
+		"contactForm":	function (state) { return state.contactForm },
+		"page":			function (state) { return state.page },
 	},
 	actions: {
 		"GET_EVENTS": function ({ commit }, payload) {
@@ -39,6 +51,31 @@ const store = new Vuex.Store({
 					commit('SET_ERROR', err)
 				})
 		},
+		"GET_CONTACT_FORM": function ({ commit }, payload) {
+			iAxios
+				.get('/api/spa/contact/bands/fields')
+				.then(function (response) {
+					if(response.data.schema) {
+						response.data.schema.fields.push(payload.form.submitButton)
+					}
+					commit('SET_CONTACT_FORM', response.data)
+				})
+				.catch(function (err) {
+					commit('SET_ERROR', err)
+				})
+		},
+		"GET_PAGE": function ({ commit }, payload) {
+			const slug = payload.slug;
+			const url = '/api/spa/page/' + slug;
+			iAxios
+				.get(url)
+				.then(function (response) {
+					commit('SET_PAGE', response.data )
+				})
+				.catch(function (err) {
+					commit('SET_ERROR', err)
+				})
+		},
 	},
 	mutations: {
 		SET_EVENTS: function (state, events) {
@@ -47,11 +84,21 @@ const store = new Vuex.Store({
 			state.error			= null;
 			state.eventDates	= events.data.map(item => item.date.split(' ').shift())
 		},
+		SET_CONTACT_FORM: function (state, data) {
+			state.loading		= false;
+			state.error			= null;
+			state.contactForm	= data;
+		},
+		SET_PAGE: function (state, data) {
+			state.loading		= false;
+			state.error			= null;
+			state.page 			= data;
+		},
 		SET_ERROR: function (state, error) {
 			state.loading		= false;
-			state.events		= null;
 			state.error			= error;
-			state.eventDates	= []
+			console.error('store error');
+			console.error(state.error)
 		},
 	},
 });
