@@ -1,5 +1,5 @@
 <template>
-    <div class="col">
+    <!--div class="col"-->
         <div class="calendar-wrapper col-6">
             <div class="col-12">
                 <h2><i class="fas fa-calendar-day" /> Event Kalender</h2>
@@ -20,7 +20,7 @@
                 />
             </div>
         </div>
-    </div>
+    <!--/div-->
 </template>
 <script>
 import VCalendar from 'v-calendar'

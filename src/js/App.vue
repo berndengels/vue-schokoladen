@@ -1,12 +1,14 @@
 <template>
     <div>
         <TheTopMenu />
-        <div class="container col-12">
-            <transition mode="out-in" name="fade">
-                <router-view />
-            </transition>
-            <div class="background_right h-100">
-                <img class="h-100 img-responsive" src="/img/the_dark_art.png" width="66px" height="718px" alt="Darkside" title="Darlside">
+        <div id="mainContainer" class="container col-12">
+            <div class="col-12 m-1 mt-3">
+                <transition mode="out-in" name="fade">
+                    <router-view />
+                </transition>
+                <div class="background_right h-100">
+                    <img class="h-100 img-responsive" src="/img/the_dark_art.png" width="66px" height="718px" alt="Darkside" title="Darlside">
+                </div>
             </div>
         </div>
         <TheBottomMenu />

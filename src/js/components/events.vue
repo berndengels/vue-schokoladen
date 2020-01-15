@@ -1,5 +1,5 @@
 <template>
-    <div class="row m-2">
+    <div class="row">
         <div v-if="error">
             <h3>Error</h3>
             {{ error }}
@@ -20,7 +20,7 @@
             </div>
             <EventsData :page-of-items="pageOfItems" />
         </div>
-        <div class="col">
+        <div class="d-none d-md-flex col">
             <Calendar :event-dates="eventDates" @click-date="openModal" />
         </div>
         <EventModal :event-data="selectedEvent" />
