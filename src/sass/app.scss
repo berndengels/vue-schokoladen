@@ -322,8 +322,8 @@ form {
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		margin-bottom: 1.6rem;
-		padding: 5px 10px;
+//		margin-bottom: 1.6rem;
+		padding: 5px 0;
 		border-radius: 4px;
 		transition: background-color 0.3s;
 		label {
@@ -380,8 +380,6 @@ form {
 			outline: 0;
 			padding: 5px;
 			font-style: italic;
-			box-shadow: none;
-			border-radius: 0;
 		}
 	}
 	.hint {
