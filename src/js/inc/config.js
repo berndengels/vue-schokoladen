@@ -12,6 +12,7 @@ const myConfig = {
 	},
 	originURL: _env.url.ORIGIN,
 	apiURL: _env.url.API,
+	adminURL: _env.url.ADMIN,
 	imageURL: _env.url.MEDIA + '/images/',
 	audioURL: _env.url.MEDIA + '/audios/',
 	NOCAPTCHA_SITEKEY: _env.nocaptcha.NOCAPTCHA_SITEKEY,

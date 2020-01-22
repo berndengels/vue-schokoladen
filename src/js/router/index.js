@@ -2,6 +2,7 @@ import EventsPage from "../components/events";
 import Pages from "../components/pages";
 import MapPage from "../components/map";
 import BandMessageFrom from "../components/form/band-message-form";
+import Redirect from "../components/redirect";
 
 const routes = [
 	{
@@ -33,6 +34,12 @@ const routes = [
 		name: 'contact',
 		path: '/contact/formBands',
 		component:  BandMessageFrom,
+	},
+	{
+		name: 'login',
+		path: '/login',
+		alias: '/admin',
+		component: Redirect,
 	},
 ];
 export default routes
